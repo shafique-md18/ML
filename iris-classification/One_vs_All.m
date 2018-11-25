@@ -10,7 +10,7 @@ function [all_theta] = One_vs_All(X, y, num_classes, lambda)
         initial_theta = zeros(n, 1);
         options = optimset('GradObj', 'on', 'MaxIter', 50);
 
-        [theta] = fminunc(@(t)(iris_cost(X, (y == i), t, lambda)), initial_theta, options);
+        [theta] = fmincg(@(t)(iris_cost(X, (y == i), t, lambda)), initial_theta, options);
 
         all_theta(i, :) = theta;
     end
